@@ -1,52 +1,57 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zajaddad <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/17 17:36:41 by zajaddad          #+#    #+#             */
+/*   Updated: 2024/11/17 17:45:21 by zajaddad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
-#include <stdio.h>
-#include <unistd.h>
+
+void	print_format(const char *fmt, va_list ap, int *counter)
+{
+	while (*fmt)
+	{
+		if (*fmt != '%')
+		{
+			*counter += ft_putchar(*fmt++);
+			continue ;
+		}
+		if (*(++fmt) == 'c')
+			*counter += ft_putchar(va_arg(ap, int));
+		else if (*fmt == 's')
+			*counter += ft_putstr(va_arg(ap, char *));
+		else if (*fmt == 'p')
+			ft_putaddress((size_t)va_arg(ap, void *), counter);
+		else if (*fmt == 'd' || *fmt == 'i')
+			ft_putnbr(va_arg(ap, int), counter);
+		else if (*fmt == 'u')
+			ft_put_unsigned_nbr(va_arg(ap, unsigned int), counter);
+		else if (*fmt == 'x')
+			ft_puthex(va_arg(ap, unsigned int), "0123456789abcdef", counter);
+		else if (*fmt == 'X')
+			ft_puthex(va_arg(ap, unsigned int), "0123456789ABCDEF", counter);
+		else
+			*counter += ft_putchar(*fmt);
+		fmt++;
+	}
+}
 
 int	ft_printf(const char *format, ...)
 {
-	int counter = 0;
-	const char *fmt = format;
+	int			counter;
+	const char	*fmt = format;
+	va_list		ap;
 
-	/* check if write works */
+	counter = 0;
 	if (write(1, NULL, 0) == -1)
 		return (-1);
-	/* 
-	 * declare ap that will refer to each argument
-	 * ap stands for argument pointer
-	 */
-	va_list ap;
-
-	/* initialize ap to point the first unnamed argument */
-	va_start(ap, format); 
-
-	/* keep iterating over the string */ 
-	while (*fmt)
-	{
-		// if current character not '%'
-		if (*fmt != '%')
-		{
-			counter += ft_putchar(*fmt++);
-			continue ;	
-		}
-		// 100% previous character is %
-		if (*(++fmt) == 'c')
-			counter += ft_putchar(va_arg(ap, int));
-		else if (*fmt == 's')
-			counter += ft_putstr(va_arg(ap, char *));
-		else if (*fmt == 'p') /* todo */
-			ft_putaddress((size_t) va_arg(ap, void *), &counter);
-		else if (*fmt == 'd' || *fmt == 'i') 
-			ft_putnbr(va_arg(ap, int), &counter);
-		else if (*fmt == 'u')
-			ft_put_unsigned_nbr(va_arg(ap, unsigned int), &counter);
-		else if (*fmt == 'x')
-			ft_puthex(va_arg(ap, unsigned int), "0123456789abcdef", &counter);
-		else if (*fmt == 'X')
-			ft_puthex(va_arg(ap, unsigned int), "0123456789ABCDEF", &counter);
-		else
-			counter += ft_putchar(*fmt);
-		fmt++;
-	}
+	va_start(ap, format);
+	print_format(fmt, ap, &counter);
 	va_end(ap);
-	return counter;
+	return (counter);
 }

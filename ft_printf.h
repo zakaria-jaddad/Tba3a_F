@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zajaddad <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/17 17:42:56 by zajaddad          #+#    #+#             */
+/*   Updated: 2024/11/17 17:44:09 by zajaddad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
@@ -15,6 +27,6 @@ void	ft_putaddress(size_t address, int *counter);
 int		ft_putchar(char c);
 int		ft_putstr(char *s);
 
-int		ft_printf(const char *, ...);
+int		ft_printf(const char *format, ...);
 
 #endif
