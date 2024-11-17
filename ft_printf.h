@@ -9,11 +9,11 @@
 # include <unistd.h>
 
 // helper function
+size_t	ft_strlen(const char *s);
 void	ft_putnbr(int n, int *counter);
 void	ft_put_unsigned_nbr(unsigned int n, int *counter);
 void	ft_puthex(size_t n, const char *base, int *counter);
 void	ft_putaddress(size_t address, int *counter);
-size_t	ft_strlen(const char *s);
 int		ft_putchar(char c);
 int		ft_putstr(char *s);
 

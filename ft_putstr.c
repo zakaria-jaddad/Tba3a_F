@@ -6,7 +6,7 @@
 /*   By: zajaddad <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:43:03 by zajaddad          #+#    #+#             */
-/*   Updated: 2024/11/16 21:44:44 by zajaddad         ###   ########.fr       */
+/*   Updated: 2024/11/17 16:13:15 by zajaddad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -14,6 +14,6 @@
 int	ft_putstr(char *s)
 {
 	if (s == NULL)
-		return (0);
+		return (write(1, "(null)", 6));
 	return (write(1, s, ft_strlen(s)));
 }

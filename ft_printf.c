@@ -1,10 +1,15 @@
 #include "ft_printf.h"
 #include <stdio.h>
+#include <unistd.h>
 
 int	ft_printf(const char *format, ...)
 {
 	int counter = 0;
 	const char *fmt = format;
+
+	/* check if write works */
+	if (write(1, NULL, 0) == -1)
+		return (-1);
 	/* 
 	 * declare ap that will refer to each argument
 	 * ap stands for argument pointer
