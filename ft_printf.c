@@ -6,7 +6,7 @@
 /*   By: zajaddad <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 17:36:41 by zajaddad          #+#    #+#             */
-/*   Updated: 2024/11/18 15:02:25 by zajaddad         ###   ########.fr       */
+/*   Updated: 2024/11/18 21:05:54 by zajaddad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_format(char fmt, va_list ap, int *counter)
 		ft_puthex(va_arg(ap, unsigned int), "0123456789abcdef", counter);
 	else if (fmt == 'X')
 		ft_puthex(va_arg(ap, unsigned int), "0123456789ABCDEF", counter);
-	else if (fmt == '%')
+	else if (fmt)
 		*counter += ft_putchar(fmt);
 }
 
