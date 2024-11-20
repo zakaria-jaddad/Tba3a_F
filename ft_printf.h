@@ -6,7 +6,7 @@
 /*   By: zajaddad <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 17:42:56 by zajaddad          #+#    #+#             */
-/*   Updated: 2024/11/17 17:44:09 by zajaddad         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:20:48 by zajaddad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
-# include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
 
