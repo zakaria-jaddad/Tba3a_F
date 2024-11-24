@@ -6,51 +6,49 @@
 /*   By: zajaddad <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 17:36:41 by zajaddad          #+#    #+#             */
-/*   Updated: 2024/11/18 21:05:54 by zajaddad         ###   ########.fr       */
+/*   Updated: 2024/11/24 17:33:52 by zajaddad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "ft_printf.h"
 
-void	print_format(char fmt, va_list ap, int *counter)
+void	print_format(char fmt, va_list *ap, int *counter)
 {
 	if (fmt == 'c')
-		*counter += ft_putchar(va_arg(ap, int));
+		*counter += ft_putchar(va_arg(*ap, int));
 	else if (fmt == 's')
-		*counter += ft_putstr(va_arg(ap, char *));
+		*counter += ft_putstr(va_arg(*ap, char *));
 	else if (fmt == 'p')
-		ft_putaddress((size_t)va_arg(ap, void *), counter);
+		ft_putaddress((size_t)va_arg(*ap, void *), counter);
 	else if (fmt == 'd' || fmt == 'i')
-		ft_putnbr(va_arg(ap, int), counter);
+		ft_putnbr(va_arg(*ap, int), counter);
 	else if (fmt == 'u')
-		ft_put_unsigned_nbr(va_arg(ap, unsigned int), counter);
+		ft_put_unsigned_nbr(va_arg(*ap, unsigned int), counter);
 	else if (fmt == 'x')
-		ft_puthex(va_arg(ap, unsigned int), "0123456789abcdef", counter);
+		ft_puthex(va_arg(*ap, unsigned int), "0123456789abcdef", counter);
 	else if (fmt == 'X')
-		ft_puthex(va_arg(ap, unsigned int), "0123456789ABCDEF", counter);
-	else if (fmt)
+		ft_puthex(va_arg(*ap, unsigned int), "0123456789ABCDEF", counter);
+	else
 		*counter += ft_putchar(fmt);
 }
 
 int	ft_printf(const char *format, ...)
 {
-	int			counter;
-	const char	*fmt = format;
-	va_list		ap;
+	int		counter;
+	va_list	ap;
 
 	counter = 0;
 	if (write(1, NULL, 0) == -1)
 		return (-1);
 	va_start(ap, format);
-	while (*fmt)
+	while (*format)
 	{
-		if (*fmt != '%')
+		if (*format != '%')
 		{
-			counter += ft_putchar(*fmt++);
+			counter += ft_putchar(*format++);
 			continue ;
 		}
-		print_format(*(++fmt), ap, &counter);
-		if (*fmt++ == 0)
+		print_format(*++format, &ap, &counter);
+		if (*format++ == 0)
 			break ;
 	}
 	va_end(ap);

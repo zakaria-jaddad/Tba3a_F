@@ -8,23 +8,28 @@ SRC = ft_printf.c		\
       ft_strlen.c		\
 
 OBJ = $(SRC:.c=.o)
-CFLAGC = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 INCLUDE = ft_printf.h
+
+CC = cc
+AR = ar -rcs 
 
 NAME = libftprintf.a
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
+	$(AR) $(NAME) $(OBJ)
 
 %.o: %.c $(INCLUDE)
 	$(CC) $(CFLAGS) -c $< -o $@
-	$(AR) -rcs $(NAME) $@
 
 clean:
-	rm -rf $(OBJ) $(BOBJ)
+	rm -f $(OBJ) 
 
 fclean: clean
-	rm -rf $(NAME) 
+	rm -f $(NAME) 
 
 re: fclean $(NAME)
+
+.PHONY: clean

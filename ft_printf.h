@@ -6,7 +6,7 @@
 /*   By: zajaddad <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 17:42:56 by zajaddad          #+#    #+#             */
-/*   Updated: 2024/11/20 18:20:48 by zajaddad         ###   ########.fr       */
+/*   Updated: 2024/11/24 17:14:48 by zajaddad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
-# include <stdlib.h>
 # include <unistd.h>
 
 // helper function
@@ -25,7 +24,6 @@ void	ft_puthex(size_t n, const char *base, int *counter);
 void	ft_putaddress(size_t address, int *counter);
 int		ft_putchar(char c);
 int		ft_putstr(char *s);
-
 int		ft_printf(const char *format, ...);
 
 #endif
